@@ -1,0 +1,65 @@
+@use "sass:color";
+@use "sass:math";
+
+// a. variables sass
+$colorFondo: #ffffff;
+$colorPrincipal: #5b6dcd;
+$colorSecundario: #f4f4f4;
+$fuentePrincipal: "Arial", sans-serif;
+$paddingBase: 20px;
+$breakpointMedium: 900px;
+$breakpointSmall: 600px;
+
+body {
+  background-color: $colorFondo;
+  font-family: $fuentePrincipal;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.contenedor {
+  text-align: center;
+
+  .logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: $paddingBase;
+  }
+
+  // b. Anidación de Selectores
+  .tabla {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: auto;
+
+    th,
+    td {
+      border: 1px solid $colorPrincipal;
+      padding: math.div($paddingBase, 2);
+    }
+
+    th {
+      background-color: $colorPrincipal;
+      color: $colorSecundario;
+    }
+
+    tr:nth-child(even) {
+      background-color: color.adjust($colorSecundario, $lightness: -10%);
+    }
+
+    // c. Primer caso de interpolación
+    @media (max-width: #{$breakpointMedium}) {
+      width: 100%;
+    }
+  }
+}
+
+// c. Segundo caso de interpolación
+.#{"tabla-responsiva"} {
+  @media (max-width: #{$breakpointSmall}) {
+    width: 50%;
+  }
+}
